@@ -1,0 +1,9 @@
+# Essential packages for Kaggle deployment
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.21.0
+nibabel>=3.2.0
+tqdm>=4.62.0
+hydra-core>=1.1.0
+omegaconf>=2.1.0
+timm>=0.9.0

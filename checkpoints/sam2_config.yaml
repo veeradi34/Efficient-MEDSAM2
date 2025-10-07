@@ -1,0 +1,77 @@
+model:
+  _target_: sam2.modeling.sam.Sam2
+  image_encoder:
+    _target_: sam2.modeling.image_encoder.hiera.HieraImageEncoder
+    embed_dim: 768
+    depth: 12
+    num_heads: 12
+    window_size: 7
+    token_size: 1
+    in_chans: 3
+    pretrained_weights: ''
+    checkpoint_num: 1000000
+    img_size: 1024
+  memory_encoder:
+    _target_: sam2.modeling.memory_encoder.MemoryEncoder
+    embed_dim: 256
+    feat_channels:
+    - 64
+    - 128
+    - 320
+    - 512
+    time_channels:
+    - 64
+    - 128
+    - 320
+    - 512
+  prompt_encoder:
+    _target_: sam2.modeling.prompt_encoder.PromptEncoder
+    embed_dim: 256
+    image_embedding_size:
+    - 64
+    - 64
+    input_image_size:
+    - 1024
+    - 1024
+    mask_in_chans: 16
+  memory_attention:
+    _target_: sam2.modeling.memory_attention.MemoryAttentionModule
+    embed_dim: 256
+    num_memory_attention_blocks: 4
+    num_frames: 5
+    use_flash_attention: false
+  mask_decoder:
+    _target_: sam2.modeling.mask_decoder.MaskDecoder
+    transformer_dim: 256
+    transformer:
+      _target_: sam2.modeling.transformer.TwoWayTransformer
+      depth: 2
+      embedding_dim: 256
+      mlp_dim: 2048
+      num_heads: 8
+    num_multimask_outputs: 3
+    iou_head_depth: 3
+    iou_head_hidden_dim: 256
+    with_gating: true
+  pixel_mean:
+  - 123.675
+  - 116.28
+  - 103.53
+  pixel_std:
+  - 58.395
+  - 57.12
+  - 57.375
+
+memory_encoder:
+  _target_: sam2.modeling.memory_encoder.MemoryEncoder
+  embed_dim: 256
+  feat_channels:
+  - 64
+  - 128
+  - 320
+  - 512
+  time_channels:
+  - 64
+  - 128
+  - 320
+  - 512
