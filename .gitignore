@@ -1,0 +1,17 @@
+﻿# Large dataset files
+msd_data/
+*.nii.gz
+*.nii
+*.hdf5
+*.h5
+*.npz
+*.zip
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.vscode/
+*.log
+checkpoints/*.pth
+checkpoints/*.ckpt
